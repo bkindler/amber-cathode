@@ -32,8 +32,8 @@ body {
   --background-modifier-cover: rgba(0, 0, 0, 0.75);
 
   /* Amber phosphor tones */
-  --text-normal: #d07818;
-  --text-muted: #8a5518;
+  --text-normal: #d46a18;
+  --text-muted: #8a4e18;
   --text-faint: #5a3e0a;
   --text-on-accent: #0c0a04;
   --text-error: #ff6622;
@@ -76,8 +76,8 @@ body {
   --background-modifier-form-field-highlighted: #1a1508;
   --background-modifier-box-shadow: rgba(0, 0, 0, 0.6);
   --background-modifier-cover: rgba(0, 0, 0, 0.75);
-  --text-normal: #d07818;
-  --text-muted: #8a5518;
+  --text-normal: #d46a18;
+  --text-muted: #8a4e18;
   --text-faint: #5a3e0a;
   --text-on-accent: #0c0a04;
   --text-error: #ff6622;
@@ -113,8 +113,8 @@ body {
 }
 .theme-light .markdown-rendered,
 .theme-light .cm-s-obsidian {
-  color: #d07818;
-  text-shadow: 0 0 4px rgba(255, 160, 40, 0.25);
+  color: #d46a18;
+  text-shadow: 0 0 4px rgba(255, 140, 30, 0.25);
 }
 
 /* ─── CRT Screen Background ────────────────── */
@@ -264,8 +264,8 @@ body {
 .theme-dark .cm-s-obsidian,
 .theme-light .markdown-rendered,
 .theme-light .cm-s-obsidian {
-  color: #d07818;
-  text-shadow: 0 0 4px rgba(255, 160, 40, 0.25);
+  color: #d46a18;
+  text-shadow: 0 0 4px rgba(255, 140, 30, 0.25);
 }
 
 /* ─── Headings: Bright Phosphor + Heavy Glow ── */
@@ -288,7 +288,7 @@ body {
   margin-top: 2em;
   margin-bottom: 0.3em;
   padding-bottom: 0.4em;
-  border-bottom: 1px solid #5a3e0a;
+  border-bottom: 1px dashed #5a3e0a;
   text-shadow:
     0 0 8px rgba(255, 176, 0, 0.6),
     0 0 20px rgba(255, 176, 0, 0.25),
@@ -304,7 +304,7 @@ body {
   margin-top: 1.8em;
   margin-bottom: 0.25em;
   padding-bottom: 0.3em;
-  border-bottom: 1px solid #5a3e0a;
+  border-bottom: 1px dashed #5a3e0a;
   text-shadow:
     0 0 6px rgba(255, 176, 0, 0.5),
     0 0 16px rgba(255, 140, 0, 0.2);
@@ -410,8 +410,8 @@ body {
   background: none;
   padding: 0;
   border: none;
-  color: #d07818;
-  text-shadow: 0 0 3px rgba(255, 160, 40, 0.2);
+  color: #d46a18;
+  text-shadow: 0 0 3px rgba(255, 140, 30, 0.2);
 }
 
 /* ─── Lists ──────────────────────────────────── */
@@ -520,11 +520,11 @@ a.tag:hover,
   text-shadow: 0 0 6px rgba(255, 176, 0, 0.15);
 }
 .markdown-rendered hr::after {
-  content: '────────────────────────────────────────────────────────────────────';
+  content: '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -';
   display: block;
   font-family: "VT323", monospace;
   font-size: 1em;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   color: #5a3e0a;
   text-shadow: 0 0 6px rgba(255, 176, 0, 0.15);
   white-space: nowrap;
@@ -684,7 +684,7 @@ a.tag:hover,
 /* ─── Search ─────────────────────────────────── */
 .search-result-file-title {
   font-weight: 700;
-  color: #d07818;
+  color: #d46a18;
 }
 .search-result-file-matched-text {
   color: #ffb000;
@@ -725,7 +725,7 @@ button.mod-cta:hover {
 .graph-view.color-fill { color: #ffb000; }
 .graph-view.color-circle { color: #5a3e0a; }
 .graph-view.color-line { color: #2a2208; }
-.graph-view.color-text { color: #d07818; }
+.graph-view.color-text { color: #d46a18; }
 .graph-view.color-fill-highlight { color: #ffc844; }
 
 /* ─── Transitions ────────────────────────────── */
