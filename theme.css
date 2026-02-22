@@ -6,6 +6,9 @@
    License: MIT
    ============================================ */
 
+/* VT323 — authentic CRT terminal pixel font */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 /* Force dark mode — this is a dark-only theme */
 body {
   color-scheme: dark;
@@ -119,27 +122,36 @@ body {
 /* ─── CRT Flicker Animation ─────────────────── */
 @keyframes crt-flicker {
   0%   { opacity: 1; }
-  3%   { opacity: 0.985; }
-  6%   { opacity: 1; }
-  42%  { opacity: 0.99; }
-  44%  { opacity: 1; }
-  92%  { opacity: 0.995; }
-  95%  { opacity: 1; }
+  2%   { opacity: 0.88; }
+  4%   { opacity: 1; }
+  8%   { opacity: 0.95; }
+  9%   { opacity: 1; }
+  35%  { opacity: 1; }
+  36%  { opacity: 0.90; }
+  37%  { opacity: 0.96; }
+  38%  { opacity: 1; }
+  60%  { opacity: 1; }
+  61%  { opacity: 0.92; }
+  62%  { opacity: 1; }
+  85%  { opacity: 1; }
+  86%  { opacity: 0.85; }
+  87%  { opacity: 0.93; }
+  88%  { opacity: 1; }
 }
 
 .theme-dark .markdown-reading-view,
 .theme-dark .markdown-source-view {
-  animation: crt-flicker 8s infinite;
+  animation: crt-flicker 6s infinite;
 }
 
 /* ─── Typography: Full Monospace Terminal ────── */
 body {
-  --font-text-theme: "IBM Plex Mono", "JetBrains Mono", "Fira Code",
-    "SF Mono", "Cascadia Code", "Courier New", monospace;
-  --font-monospace-theme: "IBM Plex Mono", "JetBrains Mono", "Fira Code",
-    "SF Mono", "Cascadia Code", "Courier New", monospace;
-  --font-text-size: 14px;
-  --line-height: 1.65;
+  --font-text-theme: "VT323", "IBM Plex Mono", "JetBrains Mono",
+    "Courier New", monospace;
+  --font-monospace-theme: "VT323", "IBM Plex Mono", "JetBrains Mono",
+    "Courier New", monospace;
+  --font-text-size: 18px;
+  --line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   letter-spacing: 0.02em;
 }
@@ -174,7 +186,7 @@ body {
 .markdown-rendered h4, .cm-header-4,
 .markdown-rendered h5, .cm-header-5,
 .markdown-rendered h6, .cm-header-6 {
-  font-family: "IBM Plex Mono", "JetBrains Mono", "Courier New", monospace;
+  font-family: "VT323", "IBM Plex Mono", "JetBrains Mono", "Courier New", monospace;
   letter-spacing: 0.04em;
 }
 
@@ -373,16 +385,22 @@ body {
   background: rgba(255, 176, 0, 0.03);
 }
 
-/* ─── Tags ───────────────────────────────────── */
+/* ─── Tags: Inverse video (like highlighted menu items) ── */
 .tag {
-  background: rgba(255, 176, 0, 0.08);
-  color: #dd9500;
-  padding: 1px 6px;
+  background: #dd9500;
+  color: #0c0a04;
+  padding: 1px 7px;
   border-radius: 0;
   font-size: 0.85em;
-  font-weight: 600;
-  border: 1px solid #3a2808;
-  text-shadow: 0 0 3px rgba(255, 176, 0, 0.25);
+  font-weight: 700;
+  border: none;
+  text-shadow: none;
+  box-shadow: 0 0 6px rgba(255, 176, 0, 0.3);
+  transition: background 0.1s ease, box-shadow 0.1s ease;
+}
+.tag:hover {
+  background: #ffb000;
+  box-shadow: 0 0 10px rgba(255, 176, 0, 0.5);
 }
 
 /* ─── Horizontal Rule: ASCII-style ──────────── */
