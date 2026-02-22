@@ -1,0 +1,569 @@
+/* ============================================
+   AMBER CATHODE — An Obsidian Dark Theme
+   80s CRT monitor aesthetic: amber phosphor,
+   scanlines, terminal glow, BBS nostalgia.
+   Author: Björn Kindler · kindler-webservices.de
+   License: MIT
+   ============================================ */
+
+/* Force dark mode — this is a dark-only theme */
+body {
+  color-scheme: dark;
+}
+
+/* ─── Dark Mode Variables ───────────────────── */
+.theme-dark {
+  /* CRT screen background — almost black with warm tint */
+  --background-primary: #0c0a04;
+  --background-primary-alt: #110e06;
+  --background-secondary: #080602;
+  --background-secondary-alt: #0a0804;
+  --background-modifier-border: #2a2208;
+  --background-modifier-form-field: #0e0c05;
+  --background-modifier-form-field-highlighted: #1a1508;
+  --background-modifier-box-shadow: rgba(0, 0, 0, 0.6);
+  --background-modifier-success: #1a1a05;
+  --background-modifier-error: #2a1005;
+  --background-modifier-error-rgb: 42, 16, 5;
+  --background-modifier-error-hover: #3a1808;
+  --background-modifier-cover: rgba(0, 0, 0, 0.75);
+
+  /* Amber phosphor tones */
+  --text-normal: #cc8800;
+  --text-muted: #8a5e10;
+  --text-faint: #5a3e0a;
+  --text-on-accent: #0c0a04;
+  --text-error: #ff6622;
+  --text-error-hover: #ff8844;
+  --text-highlight-bg: rgba(255, 176, 0, 0.12);
+  --text-highlight-bg-active: rgba(255, 176, 0, 0.25);
+  --text-selection: rgba(255, 176, 0, 0.15);
+  --text-accent: #ffb000;
+  --text-accent-hover: #ffc844;
+
+  --interactive-normal: #1a1508;
+  --interactive-hover: #24200c;
+  --interactive-accent: #dd9500;
+  --interactive-accent-rgb: 221, 149, 0;
+  --interactive-accent-hover: #ffb000;
+  --interactive-success: #88aa00;
+
+  --scrollbar-bg: rgba(0, 0, 0, 0);
+  --scrollbar-thumb-bg: rgba(255, 176, 0, 0.1);
+  --scrollbar-active-thumb-bg: rgba(255, 176, 0, 0.2);
+  --highlight-mix-blend-mode: lighten;
+
+  /* All headings in phosphor amber shades */
+  --h1-color: #ffb000;
+  --h2-color: #ee9900;
+  --h3-color: #dd8800;
+  --h4-color: #cc7700;
+  --h5-color: #bb6600;
+  --h6-color: #aa5500;
+}
+
+/* Light mode: not supported — Amber Cathode is a dark-only theme. */
+
+/* ─── CRT Screen Background ────────────────── */
+
+/*
+ * Layered CRT monitor simulation:
+ * 1. CRT vignette — heavy darkening at edges (barrel distortion feel)
+ * 2. Scanlines — horizontal lines simulating electron beam raster
+ * 3. Phosphor grain — fine noise simulating phosphor dot structure
+ * 4. Subtle amber ambient glow from center
+ */
+.theme-dark body,
+.theme-dark .workspace-leaf-content,
+.theme-dark .markdown-source-view,
+.theme-dark .markdown-reading-view {
+  background-color: #0c0a04;
+  background-image:
+    /* 1 — CRT vignette: heavy edge darkening */
+    radial-gradient(
+      ellipse 65% 55% at 50% 50%,
+      transparent 30%,
+      rgba(0, 0, 0, 0.3) 60%,
+      rgba(0, 0, 0, 0.7) 90%,
+      rgba(0, 0, 0, 0.85) 100%
+    ),
+    /* 2 — Scanlines */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.15) 2px,
+      rgba(0, 0, 0, 0.15) 4px
+    ),
+    /* 3 — Phosphor dot grain */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E"),
+    /* 4 — Warm amber center glow */
+    radial-gradient(
+      ellipse 50% 40% at 50% 50%,
+      rgba(255, 176, 0, 0.015) 0%,
+      transparent 70%
+    );
+  background-size:
+    100% 100%,
+    4px 4px,
+    200px 200px,
+    100% 100%;
+  background-repeat:
+    no-repeat,
+    repeat,
+    repeat,
+    no-repeat;
+  background-attachment: fixed;
+}
+
+/* ─── CRT Flicker Animation ─────────────────── */
+@keyframes crt-flicker {
+  0%   { opacity: 1; }
+  3%   { opacity: 0.985; }
+  6%   { opacity: 1; }
+  42%  { opacity: 0.99; }
+  44%  { opacity: 1; }
+  92%  { opacity: 0.995; }
+  95%  { opacity: 1; }
+}
+
+.theme-dark .markdown-reading-view,
+.theme-dark .markdown-source-view {
+  animation: crt-flicker 8s infinite;
+}
+
+/* ─── Typography: Full Monospace Terminal ────── */
+body {
+  --font-text-theme: "IBM Plex Mono", "JetBrains Mono", "Fira Code",
+    "SF Mono", "Cascadia Code", "Courier New", monospace;
+  --font-monospace-theme: "IBM Plex Mono", "JetBrains Mono", "Fira Code",
+    "SF Mono", "Cascadia Code", "Courier New", monospace;
+  --font-text-size: 14px;
+  --line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Page Width ────────────────────────────── */
+.markdown-source-view.mod-cm6 .cm-content,
+.markdown-source-view.mod-cm6 .cm-line,
+.markdown-reading-view .markdown-preview-section,
+.markdown-source-view .CodeMirror-lines,
+.markdown-preview-view .markdown-preview-sizer {
+  max-width: 620px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.markdown-source-view,
+.markdown-rendered {
+  padding: 24px 32px;
+}
+
+/* ─── Phosphor Glow Text Effect ─────────────── */
+.theme-dark .markdown-rendered,
+.theme-dark .cm-s-obsidian {
+  color: #cc8800;
+  text-shadow: 0 0 4px rgba(255, 176, 0, 0.25);
+}
+
+/* ─── Headings: Bright Phosphor + Heavy Glow ── */
+.markdown-rendered h1, .cm-header-1,
+.markdown-rendered h2, .cm-header-2,
+.markdown-rendered h3, .cm-header-3,
+.markdown-rendered h4, .cm-header-4,
+.markdown-rendered h5, .cm-header-5,
+.markdown-rendered h6, .cm-header-6 {
+  font-family: "IBM Plex Mono", "JetBrains Mono", "Courier New", monospace;
+  letter-spacing: 0.04em;
+}
+
+/* H1 — brightest phosphor, maximum glow */
+.markdown-rendered h1, .cm-header-1 {
+  font-weight: 700;
+  font-size: 1.6em;
+  color: var(--h1-color);
+  text-transform: uppercase;
+  margin-top: 2em;
+  margin-bottom: 0.3em;
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid #5a3e0a;
+  text-shadow:
+    0 0 8px rgba(255, 176, 0, 0.6),
+    0 0 20px rgba(255, 176, 0, 0.25),
+    0 0 40px rgba(255, 140, 0, 0.1);
+}
+
+/* H2 */
+.markdown-rendered h2, .cm-header-2 {
+  font-weight: 700;
+  font-size: 1.35em;
+  color: var(--h2-color);
+  text-transform: uppercase;
+  margin-top: 1.8em;
+  margin-bottom: 0.25em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #5a3e0a;
+  text-shadow:
+    0 0 6px rgba(255, 176, 0, 0.5),
+    0 0 16px rgba(255, 140, 0, 0.2);
+}
+
+/* H3 */
+.markdown-rendered h3, .cm-header-3 {
+  font-weight: 700;
+  font-size: 1.18em;
+  color: var(--h3-color);
+  text-transform: uppercase;
+  margin-top: 1.5em;
+  margin-bottom: 0.2em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px dashed #3a2808;
+  text-shadow:
+    0 0 5px rgba(255, 176, 0, 0.4),
+    0 0 12px rgba(255, 140, 0, 0.15);
+}
+
+/* H4 */
+.markdown-rendered h4, .cm-header-4 {
+  font-weight: 700;
+  font-size: 1.05em;
+  color: var(--h4-color);
+  text-transform: uppercase;
+  margin-top: 1.3em;
+  margin-bottom: 0.15em;
+  text-shadow: 0 0 4px rgba(255, 176, 0, 0.35);
+}
+
+/* H5 */
+.markdown-rendered h5, .cm-header-5 {
+  font-weight: 600;
+  font-size: 0.95em;
+  color: var(--h5-color);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 1.2em;
+  margin-bottom: 0.1em;
+  text-shadow: 0 0 3px rgba(255, 140, 0, 0.3);
+}
+
+/* H6 */
+.markdown-rendered h6, .cm-header-6 {
+  font-weight: 600;
+  font-size: 0.88em;
+  color: var(--h6-color);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 1em;
+  margin-bottom: 0.1em;
+  text-shadow: 0 0 3px rgba(255, 140, 0, 0.25);
+}
+
+/* ─── Links: BBS-style brackets ─────────────── */
+.markdown-rendered a, .cm-url, .cm-hmd-internal-link {
+  color: #ffb000;
+  text-decoration: none;
+  text-shadow: 0 0 5px rgba(255, 176, 0, 0.4);
+  border-bottom: 1px solid #5a3e0a;
+  transition: text-shadow 0.15s ease, color 0.15s ease;
+}
+.markdown-rendered a:hover {
+  color: #ffc844;
+  text-shadow: 0 0 10px rgba(255, 200, 68, 0.6);
+  border-bottom-color: #ffb000;
+}
+
+/* ─── Blockquotes ────────────────────────────── */
+.markdown-rendered blockquote {
+  border-left: 2px solid #5a3e0a;
+  padding: 0.4em 1em;
+  margin: 1em 0;
+  color: #8a5e10;
+  background: rgba(255, 176, 0, 0.02);
+  border-radius: 0;
+  font-style: normal;
+}
+
+/* ─── Code: Terminal feel ────────────────────── */
+.markdown-rendered code, .cm-inline-code {
+  font-family: var(--font-monospace-theme);
+  font-size: 0.9em;
+  background: rgba(255, 176, 0, 0.06);
+  padding: 0.12em 0.4em;
+  border-radius: 0;
+  border: 1px solid #2a2208;
+  color: #ffb000;
+  text-shadow: 0 0 4px rgba(255, 176, 0, 0.3);
+}
+.markdown-rendered pre {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #2a2208;
+  border-radius: 0;
+  padding: 1em 1.2em;
+  overflow-x: auto;
+  line-height: 1.5;
+  /* Inset shadow for recessed screen look */
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+.markdown-rendered pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  color: #cc8800;
+  text-shadow: 0 0 3px rgba(255, 176, 0, 0.2);
+}
+
+/* ─── Lists ──────────────────────────────────── */
+.markdown-rendered ul, .markdown-rendered ol {
+  padding-left: 1.6em;
+}
+.markdown-rendered li {
+  margin-bottom: 0.2em;
+}
+.markdown-rendered ul > li::marker {
+  color: #dd9500;
+}
+.markdown-rendered ol > li::marker {
+  color: #dd9500;
+  font-weight: 600;
+}
+
+/* ─── Checkboxes ─────────────────────────────── */
+.markdown-rendered .task-list-item-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #5a3e0a;
+  border-radius: 0;
+  margin-right: 7px;
+  position: relative;
+  top: 2px;
+  cursor: pointer;
+}
+.markdown-rendered .task-list-item-checkbox:checked {
+  background: #dd9500;
+  border-color: #dd9500;
+  box-shadow: 0 0 4px rgba(255, 176, 0, 0.4);
+}
+
+/* ─── Tables ─────────────────────────────────── */
+.markdown-rendered table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 0.9em;
+}
+.markdown-rendered th {
+  background: rgba(255, 176, 0, 0.06);
+  font-weight: 700;
+  color: #ffb000;
+  text-align: left;
+  padding: 0.4em 0.8em;
+  border-bottom: 1px solid #5a3e0a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 4px rgba(255, 176, 0, 0.3);
+}
+.markdown-rendered td {
+  padding: 0.35em 0.8em;
+  border-bottom: 1px solid #1a1508;
+}
+.markdown-rendered tr:hover td {
+  background: rgba(255, 176, 0, 0.03);
+}
+
+/* ─── Tags ───────────────────────────────────── */
+.tag {
+  background: rgba(255, 176, 0, 0.08);
+  color: #dd9500;
+  padding: 1px 6px;
+  border-radius: 0;
+  font-size: 0.85em;
+  font-weight: 600;
+  border: 1px solid #3a2808;
+  text-shadow: 0 0 3px rgba(255, 176, 0, 0.25);
+}
+
+/* ─── Horizontal Rule: ASCII-style ──────────── */
+.markdown-rendered hr {
+  border: none;
+  height: 1px;
+  background: #5a3e0a;
+  margin: 2em 0;
+  box-shadow: 0 0 6px rgba(255, 176, 0, 0.15);
+}
+
+/* ─── Bold & Italic ──────────────────────────── */
+.markdown-rendered strong, .cm-strong {
+  color: #ffb000;
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(255, 176, 0, 0.4);
+}
+.markdown-rendered em, .cm-em {
+  color: #ee9900;
+  font-style: italic;
+}
+
+/* ─── Sidebar: Deep black terminal ──────────── */
+.theme-dark .mod-left-split,
+.theme-dark .mod-left-split .workspace-leaf-content,
+.theme-dark .mod-left-split .workspace-tabs,
+.theme-dark .mod-left-split .workspace-tab-container,
+.theme-dark .mod-left-split .nav-files-container {
+  background-color: #060400 !important;
+  background-image: none !important;
+}
+
+.theme-dark .mod-left-split .workspace-tab-header-container {
+  background-color: #060400 !important;
+  background-image: none !important;
+  border-bottom: 1px solid #2a2208;
+}
+
+.theme-dark .mod-left-split .workspace-tab-header.is-active {
+  background-color: #0c0a04 !important;
+}
+
+/* ─── Sidebar Items ──────────────────────────── */
+.nav-file-title, .nav-folder-title {
+  padding: 3px 9px;
+  border-radius: 0;
+  font-size: 0.85em;
+  transition: background 0.1s ease;
+}
+.nav-file-title:hover, .nav-folder-title:hover {
+  background: rgba(255, 176, 0, 0.05);
+}
+.nav-file-title.is-active {
+  background: #dd9500;
+  color: #0c0a04;
+  font-weight: 600;
+}
+.nav-folder-title {
+  color: #dd9500;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.82em;
+  text-shadow: 0 0 3px rgba(255, 176, 0, 0.25);
+}
+
+/* ─── Tabs ───────────────────────────────────── */
+.workspace-tab-header {
+  font-size: 0.82em;
+  padding: 5px 12px;
+  border-radius: 0;
+  transition: background 0.1s ease;
+}
+.workspace-tab-header.is-active {
+  background: var(--background-primary);
+}
+
+/* ─── Scrollbar ──────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0); }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 176, 0, 0.12);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 176, 0, 0.2);
+}
+
+/* ─── Images ─────────────────────────────────── */
+.markdown-rendered img {
+  border-radius: 0;
+  max-width: 100%;
+  margin: 0.5em 0;
+  opacity: 0.85;
+  filter: sepia(0.4) saturate(1.5) brightness(0.8);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+.markdown-rendered img:hover {
+  opacity: 1;
+  filter: sepia(0.2) saturate(1.2) brightness(0.9);
+}
+
+/* ─── Callouts ───────────────────────────────── */
+.callout {
+  border-radius: 0;
+  border-left: 2px solid #5a3e0a;
+  padding: 0.7em 1em;
+  margin: 1em 0;
+  background: rgba(255, 176, 0, 0.03);
+}
+.callout-title {
+  font-weight: 700;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.25em;
+  color: #dd9500;
+  text-shadow: 0 0 4px rgba(255, 176, 0, 0.3);
+}
+
+/* ─── Search ─────────────────────────────────── */
+.search-result-file-title {
+  font-weight: 700;
+  color: #cc8800;
+}
+.search-result-file-matched-text {
+  color: #ffb000;
+  background: rgba(255, 176, 0, 0.12);
+}
+
+/* ─── Modals ─────────────────────────────────── */
+.modal-container .modal {
+  border-radius: 0;
+  border: 1px solid #2a2208;
+  box-shadow: 0 0 30px rgba(255, 176, 0, 0.05), 0 16px 48px rgba(0, 0, 0, 0.5);
+  background: #0c0a04;
+}
+.suggestion-item.is-selected {
+  background: #dd9500;
+  color: #0c0a04;
+  border-radius: 0;
+}
+
+/* ─── Buttons ────────────────────────────────── */
+button.mod-cta {
+  background: #dd9500;
+  color: #0c0a04;
+  border-radius: 0;
+  font-weight: 700;
+  border: none;
+  padding: 7px 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+button.mod-cta:hover {
+  background: #ffb000;
+  box-shadow: 0 0 12px rgba(255, 176, 0, 0.3);
+}
+
+/* ─── Graph View ─────────────────────────────── */
+.graph-view.color-fill { color: #ffb000; }
+.graph-view.color-circle { color: #5a3e0a; }
+.graph-view.color-line { color: #2a2208; }
+.graph-view.color-text { color: #cc8800; }
+.graph-view.color-fill-highlight { color: #ffc844; }
+
+/* ─── Transitions ────────────────────────────── */
+.workspace-leaf, .nav-file-title, .nav-folder-title, button, a {
+  transition: background 0.1s ease, color 0.1s ease, border-color 0.1s ease;
+}
+
+/* ─── Focus (a11y) ───────────────────────────── */
+*:focus-visible {
+  outline: 1px solid #dd9500;
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+/* ─── Print ──────────────────────────────────── */
+@media print {
+  .markdown-rendered { max-width: 100%; color: #000; }
+  .markdown-rendered a { color: #000; text-decoration: underline; }
+}
