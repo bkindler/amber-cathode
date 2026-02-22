@@ -507,25 +507,31 @@ a.tag:hover,
 .multi-select-pill:hover .multi-select-pill-remove-button {
   color: #0c0a04 !important;
 }
-/* Links inside pills only: force dark text on amber bg */
+/* Links inside pills: force dark text on amber bg */
 .multi-select-pill a,
 .multi-select-pill-content a,
-.multi-select-pill .multi-select-pill-content {
+.multi-select-pill .multi-select-pill-content,
+.multi-select-pill .internal-link,
+.multi-select-pill .metadata-link-inner {
   color: #0c0a04 !important;
   text-shadow: none !important;
   border-bottom: none !important;
 }
-/* Links in metadata that are NOT inside pills: bright amber */
-.metadata-property-value > a,
-.metadata-property-value .internal-link,
-.metadata-link-inner {
+/* Non-linked pill content: slightly faded */
+.multi-select-pill-content {
+  color: #2a1e08 !important;
+}
+/* Links in metadata OUTSIDE pills: bright amber */
+.metadata-property-value > a:not(.multi-select-pill *),
+.metadata-container .internal-link:not(.multi-select-pill .internal-link),
+.metadata-property-value > .internal-link {
   color: #ffb000 !important;
   text-shadow: 0 0 5px rgba(255, 176, 0, 0.4) !important;
   border-bottom: 1px solid #6a4e14 !important;
 }
-.metadata-property-value > a:hover,
-.metadata-property-value .internal-link:hover,
-.metadata-link-inner:hover {
+.metadata-property-value > a:not(.multi-select-pill *):hover,
+.metadata-container .internal-link:not(.multi-select-pill .internal-link):hover,
+.metadata-property-value > .internal-link:hover {
   color: #ffc844 !important;
   text-shadow: 0 0 10px rgba(255, 200, 68, 0.6) !important;
 }
